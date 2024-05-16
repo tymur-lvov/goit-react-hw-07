@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <div
       style={{
-        position: "absolute",
+        position: "fixed",
         top: 12,
         right: 12,
       }}
