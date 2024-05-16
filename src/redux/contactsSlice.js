@@ -1,5 +1,6 @@
-import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./contactsOps";
+import { selectNameFilter } from "./filtersSlice";
 import toast from "react-hot-toast";
 
 const initialState = {
@@ -17,6 +18,7 @@ export const contactsSlice = createSlice({
     selectContacts: (state) => state.contacts.items,
     selectIsLoading: (state) => state.contacts.isLoading,
     selectIsError: (state) => state.contacts.isError,
+    selectFilteredContacts: (state) => state.contacts.items,
   },
   extraReducers: (builder) => {
     builder
@@ -69,4 +71,11 @@ export const contactsSlice = createSlice({
 
 export const { selectContacts, selectIsLoading, selectIsError } =
   contactsSlice.selectors;
+
+export const selectFilteredContacts = createSelector(
+  [selectContacts, selectNameFilter],
+  (items, { name }) =>
+    items.filter((item) => item.name.toLowerCase().includes(name.toLowerCase()))
+);
+
 export const contactsReducer = contactsSlice.reducer;
