@@ -18,7 +18,6 @@ export const contactsSlice = createSlice({
     selectContacts: (state) => state.contacts.items,
     selectIsLoading: (state) => state.contacts.isLoading,
     selectIsError: (state) => state.contacts.isError,
-    selectFilteredContacts: (state) => state.contacts.items,
   },
   extraReducers: (builder) => {
     builder
